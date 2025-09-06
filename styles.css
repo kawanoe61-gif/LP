@@ -50,14 +50,17 @@ img { max-width: 100%; display: block; }
 .btn-line { background: linear-gradient(135deg, #06c755 0%, #00b43f 100%); color: #ffffff; border-color: rgba(0,0,0,.05); }
 .btn-line:hover { filter: brightness(1.03); }
 
-/* Wobble animation for hero primary CTA */
+/* Wobble animation for hero primary CTA (enhanced) */
 @keyframes ctaWobble {
-  0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 8px 20px rgba(6,199,85,0.18); }
-  50% { transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 28px rgba(6,199,85,0.28); }
+  0%   { transform: translateY(0) scale(1); box-shadow: 0 8px 22px rgba(6,199,85,0.22); }
+  25%  { transform: translateY(-4px) scale(1.05); box-shadow: 0 16px 34px rgba(6,199,85,0.36); }
+  50%  { transform: translateY(0) scale(1.01); box-shadow: 0 10px 24px rgba(6,199,85,0.26); }
+  75%  { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 30px rgba(6,199,85,0.32); }
+  100% { transform: translateY(0) scale(1); box-shadow: 0 8px 22px rgba(6,199,85,0.22); }
 }
 .hero .cta-row .btn-line {
-  animation: ctaWobble 2.4s ease-in-out infinite;
-  will-change: transform;
+  animation: ctaWobble 1.8s ease-in-out infinite;
+  will-change: transform, box-shadow;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero .cta-row .btn-line { animation: none; }
