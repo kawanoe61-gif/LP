@@ -46,6 +46,9 @@ img { max-width: 100%; display: block; }
 .btn-primary { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); color: #04210a; }
 .btn-outline { border-color: rgba(0,0,0,.22); color: var(--text); }
 .btn-ghost { background: rgba(0,0,0,.04); color: var(--text); border-color: rgba(0,0,0,.12); }
+/* LINE green button */
+.btn-line { background: linear-gradient(135deg, #06c755 0%, #00b43f 100%); color: #ffffff; border-color: rgba(0,0,0,.05); }
+.btn-line:hover { filter: brightness(1.03); }
 
 /* Hero */
 .hero { padding: 64px 0; background: radial-gradient(1000px 400px at 10% 0%, rgba(255,122,0,.12), transparent 40%), radial-gradient(1000px 400px at 90% 0%, rgba(255,179,71,.12), transparent 40%); border-bottom: 1px solid rgba(0,0,0,.06); }

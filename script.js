@@ -32,7 +32,7 @@ const y = document.getElementById('y');
 if (y) y.textContent = new Date().getFullYear();
 
 // CTA links (set your real links here)
-const LINE_URL = 'https://line.me/R/ti/p/your-line-id'; // TODO: 実URLに変更
+const LINE_URL = 'https://lin.ee/NdqnivKm'; // 指定のLINE URL
 const TEL_NUMBER = '080-0000-0000'; // TODO: 実番号に変更
 const FORM_URL = 'https://docs.google.com/forms/d/e/xxxxxxxxxxxxxxxxxxxx/viewform'; // TODO: 実URLに変更
 const IG_URL = 'https://www.instagram.com/restart__children?igsh=aXIwOXY4ZTZtbnJ5'; // Instagram
