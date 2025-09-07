@@ -55,3 +55,71 @@ const igButton = document.getElementById('igButton');
     el.rel = 'noopener noreferrer';
   }
 });
+
+// Voices slider
+(function initVoicesSlider() {
+  const track = document.getElementById('voicesTrack');
+  if (!track) return;
+
+  const prevBtn = document.querySelector('#voices .prev');
+  const nextBtn = document.querySelector('#voices .next');
+  const slides = Array.from(track.children);
+  let current = 0;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
+  const scrollToIndex = (i) => {
+    current = clamp(i, 0, slides.length - 1);
+    const x = slides[current].offsetLeft;
+    track.scrollTo({ left: x, behavior: 'smooth' });
+    updateButtons();
+  };
+
+  const updateButtons = () => {
+    if (prevBtn) prevBtn.disabled = current <= 0;
+    if (nextBtn) nextBtn.disabled = current >= slides.length - 1;
+  };
+
+  if (prevBtn) prevBtn.addEventListener('click', () => scrollToIndex(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => scrollToIndex(current + 1));
+
+  // Sync current index on manual scroll
+  let scrollTimeout;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const mid = track.scrollLeft + track.clientWidth / 2;
+      let nearest = 0;
+      let dist = Infinity;
+      slides.forEach((s, idx) => {
+        const center = s.offsetLeft + s.clientWidth / 2;
+        const d = Math.abs(center - mid);
+        if (d < dist) { dist = d; nearest = idx; }
+      });
+      current = nearest;
+      updateButtons();
+    }, 80);
+  }, { passive: true });
+
+  // Keyboard navigation when focused in section
+  const voicesSection = document.getElementById('voices');
+  if (voicesSection) {
+    voicesSection.tabIndex = 0;
+    voicesSection.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(current - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(current + 1); }
+    });
+  }
+
+  // Basic swipe (touch)
+  let startX = 0;
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) {
+      if (dx < 0) scrollToIndex(current + 1); else scrollToIndex(current - 1);
+    }
+  });
+
+  // Init
+  updateButtons();
+})();
